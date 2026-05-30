@@ -5,7 +5,11 @@ import {
   Heart,
   Users,
   Clock,
-  MapPin
+  MapPin,
+  Pizza,
+  Coffee,
+  Cake,
+  UtensilsCrossed
 } from 'lucide-react'
 
 const stats = [
@@ -13,6 +17,15 @@ const stats = [
   { icon: ShieldCheck, label: 'Halal Every Day', value: '100%' },
   { icon: Factory, label: 'In-House Production', value: 'All' },
   { icon: Clock, label: 'Opens Daily', value: '7AM' }
+]
+
+const famousItems = [
+  { icon: Pizza, text: 'Legendary Chicken Pizza' },
+  { icon: UtensilsCrossed, text: 'Chocolate Lava Dessert' },
+  { icon: UtensilsCrossed, text: 'Best Garlic Bread in Thamel' },
+  { icon: UtensilsCrossed, text: 'Apple and Chocolate Danish' },
+  { icon: Cake, text: 'Custom Cakes for All Occasions' },
+  { icon: Coffee, text: 'Best Cafe Latte in Thamel' }
 ]
 
 function StatCard({ stat, index }) {
@@ -98,6 +111,37 @@ export default function About() {
         </div>
       </section>
 
+      {/* Famous For Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="font-playfair text-3xl text-[#1A2E1A] dark:text-[#FDF8F0] text-center mb-8"
+          >
+            What We're Famous For
+          </motion.h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {famousItems.map((item, index) => (
+              <motion.div
+                key={item.text}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="flex items-center gap-4 bg-white dark:bg-[#2C1810] p-4 rounded-xl shadow-md"
+              >
+                <div className="w-12 h-12 bg-[#C8841A]/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <item.icon size={24} className="text-[#C8841A]" />
+                </div>
+                <span className="text-[#1A2E1A] dark:text-[#FDF8F0] font-medium">{item.text}</span>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Mission Cards */}
       <section className="py-16 bg-[#FAF4E8] dark:bg-[#1A1008] px-4">
         <div className="max-w-6xl mx-auto">
@@ -169,7 +213,7 @@ export default function About() {
       </section>
 
       {/* Halal Certificate Section */}
-      <section className="py-16 px-4">
+      <section id="halal" className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}

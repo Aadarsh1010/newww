@@ -6,6 +6,11 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import CartDrawer from './components/CartDrawer'
 import LoadingScreen from './components/LoadingScreen'
+import WhatsAppFloat from './components/WhatsAppFloat'
+import HalalTrustBadge from './components/HalalTrustBadge'
+import BackToTop from './components/BackToTop'
+import DailySpecialPopup from './components/DailySpecialPopup'
+import MobileBottomBar from './components/MobileBottomBar'
 import Home from './pages/Home'
 import Menu from './pages/Menu'
 import OrderOnline from './pages/OrderOnline'
@@ -48,6 +53,11 @@ export default function App() {
           </Routes>
         </main>
         <Footer />
+        <WhatsAppFloat />
+        <HalalTrustBadge />
+        <BackToTop />
+        <DailySpecialPopup />
+        <MobileBottomBar />
       </div>
     </CartProvider>
   )
