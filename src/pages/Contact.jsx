@@ -1,329 +1,409 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import { MapPin, Phone, Clock, Mail, Send, CheckCircle, Instagram, Facebook, MessageCircle } from 'lucide-react'
+import {
+  MapPin,
+  Phone,
+  Clock,
+  Factory,
+  MessageCircle,
+  Facebook,
+  Instagram,
+  ExternalLink,
+  Send
+} from 'lucide-react'
+
+const subjects = [
+  'Order Enquiry',
+  'Custom Cake',
+  'General',
+  'Collaboration',
+  'Other'
+]
 
 export default function Contact() {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
+    email: '',
+    subject: 'Order Enquiry',
     message: ''
   })
-  const [formSubmitted, setFormSubmitted] = useState(false)
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    // Simulate form submission
-    setFormSubmitted(true)
-    setTimeout(() => {
-      setFormSubmitted(false)
-      setFormData({ name: '', email: '', phone: '', message: '' })
-    }, 3000)
-  }
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
   }
 
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const message = `Hello Fresh Bake!
+
+Name: ${formData.name}
+Phone/WhatsApp: ${formData.phone}
+${formData.email ? `Email: ${formData.email}` : ''}
+Subject: ${formData.subject}
+
+Message:
+${formData.message}`
+
+    const whatsappUrl = `https://wa.me/9779887165566?text=${encodeURIComponent(message)}`
+    window.open(whatsappUrl, '_blank')
+  }
+
   return (
-    <>
+    <div className="min-h-screen bg-[#FDF8F0] dark:bg-[#1A1008] transition-colors duration-300">
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-b from-soft-ivory to-cream-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
+      <section className="bg-[#1A2E1A] py-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center"
+            className="font-playfair text-5xl text-[#FDF8F0] mb-2"
           >
-            <div className="w-20 h-20 bg-golden-amber/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <MessageCircle className="w-10 h-10 text-golden-amber" />
-            </div>
-            <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-deep-forest mb-4">
-              Contact Us
-            </h1>
-            <p className="text-warm-brown text-lg max-w-2xl mx-auto">
-              Have questions or feedback? We&apos;d love to hear from you. Reach out to us anytime.
+            Find Us in Kathmandu
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="font-dancing text-2xl text-[#C8841A]"
+          >
+            Two locations — always fresh
+          </motion.p>
+        </div>
+      </section>
+
+      {/* Two Location Cards */}
+      <section className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {/* Thamel Location */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-[#2C1810] rounded-2xl overflow-hidden shadow-xl"
+            >
+              <div className="bg-[#1A2E1A] px-6 py-4">
+                <h2 className="font-playfair text-2xl text-[#FDF8F0] flex items-center gap-3">
+                  <MapPin size={24} className="text-[#C8841A]" />
+                  Thamel
+                </h2>
+              </div>
+              <div className="p-6">
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-start gap-3">
+                    <MapPin size={18} className="text-[#C8841A] mt-1 flex-shrink-0" />
+                    <p className="text-[#5C3317] dark:text-[#FDF8F0]/80 text-sm">
+                      Thamel Marg, 100m from Tridevi Sadak T-junction, Ward 26, Kathmandu 44600
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Phone size={18} className="text-[#C8841A]" />
+                    <a href="tel:+9779887165566" className="text-[#5C3317] dark:text-[#FDF8F0]/80 hover:text-[#C8841A]">
+                      +977 988-716-5566
+                    </a>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Clock size={18} className="text-[#C8841A]" />
+                    <p className="text-[#5C3317] dark:text-[#FDF8F0]/80">
+                      Open 7:00 AM – 8:00 PM
+                    </p>
+                  </div>
+                </div>
+
+                {/* Google Maps Embed */}
+                <div className="rounded-xl overflow-hidden h-48 mb-4">
+                  <iframe
+                    src="https://maps.google.com/maps?q=27.7157,85.3108&z=17&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Thamel Location"
+                  />
+                </div>
+
+                <a
+                  href="https://www.google.com/maps/search/Fresh+Bake+Factory+Outlet+Thamel"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full bg-[#C8841A] text-[#1A2E1A] py-3 rounded-xl font-semibold hover:brightness-110 transition-all"
+                >
+                  <MapPin size={18} />
+                  Get Directions
+                </a>
+              </div>
+            </motion.div>
+
+            {/* Nayabazar Factory Outlet */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-white dark:bg-[#2C1810] rounded-2xl overflow-hidden shadow-xl"
+            >
+              <div className="bg-[#1A2E1A] px-6 py-4">
+                <h2 className="font-playfair text-2xl text-[#FDF8F0] flex items-center gap-3">
+                  <Factory size={24} className="text-[#C8841A]" />
+                  Nayabazar Factory Outlet
+                </h2>
+              </div>
+              <div className="p-6">
+                <div className="space-y-4 mb-6">
+                  <div className="flex items-start gap-3">
+                    <MapPin size={18} className="text-[#C8841A] mt-1 flex-shrink-0" />
+                    <p className="text-[#5C3317] dark:text-[#FDF8F0]/80 text-sm">
+                      Nayabazar, Kathmandu
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Factory size={18} className="text-[#C8841A]" />
+                    <p className="text-[#5C3317] dark:text-[#FDF8F0]/80">
+                      Factory Outlet — freshest stock here
+                    </p>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Clock size={18} className="text-[#C8841A]" />
+                    <p className="text-[#5C3317] dark:text-[#FDF8F0]/80">
+                      Open 7:00 AM – 8:00 PM
+                    </p>
+                  </div>
+                </div>
+
+                {/* Google Maps Embed */}
+                <div className="rounded-xl overflow-hidden h-48 mb-4">
+                  <iframe
+                    src="https://maps.google.com/maps?q=27.7230,85.3120&z=17&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Nayabazar Location"
+                  />
+                </div>
+
+                <a
+                  href="https://www.google.com/maps/search/Fresh+Bake+Factory+Outlet+Nayabazar"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-2 w-full bg-[#C8841A] text-[#1A2E1A] py-3 rounded-xl font-semibold hover:brightness-110 transition-all"
+                >
+                  <MapPin size={18} />
+                  Get Directions
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Directions Card for Tourists */}
+      <section className="py-8 px-4">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-[#1A2E1A] rounded-2xl p-8 text-center"
+          >
+            <MapPin size={48} className="text-[#C8841A] mx-auto mb-4" />
+            <h3 className="font-playfair text-2xl text-[#FDF8F0] mb-4">
+              Finding Us in Thamel
+            </h3>
+            <p className="text-[#FDF8F0]/90 max-w-xl mx-auto leading-relaxed">
+              Enter Thamel via Tridevi Sadak. When you reach the T-junction at Thamel Marg, TURN LEFT. We are 100 metres on the right. Look for the Fresh Bake sign — the bakery everyone keeps telling you about!
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* Contact Content */}
-      <section className="py-20 bg-cream-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Contact Form + Quick Contact */}
+      <section className="py-16 bg-[#FAF4E8] dark:bg-[#1A1008] px-4">
+        <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-white rounded-3xl p-8 shadow-lg"
             >
-              <h2 className="font-playfair text-2xl font-bold text-deep-forest mb-6">Send us a message</h2>
-              
-              {formSubmitted ? (
-                <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  className="text-center py-12"
-                >
-                  <div className="w-20 h-20 bg-halal-green rounded-full flex items-center justify-center mx-auto mb-6">
-                    <CheckCircle className="w-10 h-10 text-white" />
-                  </div>
-                  <h3 className="font-playfair text-2xl font-bold text-deep-forest mb-2">Message Sent!</h3>
-                  <p className="text-warm-brown">We&apos;ll get back to you soon.</p>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                      <label htmlFor="name" className="block text-sm font-medium text-warm-espresso mb-2">
-                        Your Name
-                      </label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 bg-soft-ivory rounded-xl border border-transparent focus:border-golden-amber focus:ring-2 focus:ring-golden-amber/20 outline-none transition-all"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-warm-espresso mb-2">
-                        Email Address
-                      </label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="w-full px-4 py-3 bg-soft-ivory rounded-xl border border-transparent focus:border-golden-amber focus:ring-2 focus:ring-golden-amber/20 outline-none transition-all"
-                        placeholder="john@example.com"
-                      />
-                    </div>
-                  </div>
+              <h2 className="font-playfair text-3xl text-[#1A2E1A] dark:text-[#FDF8F0] mb-6">
+                Send Us a Message
+              </h2>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-[#1A2E1A] dark:text-[#FDF8F0] mb-1">
+                    Full Name
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl border border-[rgba(200,132,26,0.3)] focus:border-[#C8841A] focus:outline-none dark:bg-[#2C1810] dark:text-[#FDF8F0]"
+                    placeholder="Your full name"
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-warm-espresso mb-2">
-                      Phone Number
+                    <label className="block text-sm font-medium text-[#1A2E1A] dark:text-[#FDF8F0] mb-1">
+                      Phone / WhatsApp
                     </label>
                     <input
                       type="tel"
-                      id="phone"
                       name="phone"
+                      required
                       value={formData.phone}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 bg-soft-ivory rounded-xl border border-transparent focus:border-golden-amber focus:ring-2 focus:ring-golden-amber/20 outline-none transition-all"
+                      className="w-full px-4 py-3 rounded-xl border border-[rgba(200,132,26,0.3)] focus:border-[#C8841A] focus:outline-none dark:bg-[#2C1810] dark:text-[#FDF8F0]"
                       placeholder="+977 98XXXXXXXX"
                     />
                   </div>
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-warm-espresso mb-2">
-                      Your Message
+                    <label className="block text-sm font-medium text-[#1A2E1A] dark:text-[#FDF8F0] mb-1">
+                      Email (optional)
                     </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
                       onChange={handleChange}
-                      required
-                      rows={5}
-                      className="w-full px-4 py-3 bg-soft-ivory rounded-xl border border-transparent focus:border-golden-amber focus:ring-2 focus:ring-golden-amber/20 outline-none transition-all resize-none"
-                      placeholder="How can we help you?"
+                      className="w-full px-4 py-3 rounded-xl border border-[rgba(200,132,26,0.3)] focus:border-[#C8841A] focus:outline-none dark:bg-[#2C1810] dark:text-[#FDF8F0]"
+                      placeholder="your@email.com"
                     />
                   </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-golden-amber text-white py-4 rounded-xl font-semibold text-lg hover:bg-opacity-90 transition-all shadow-md flex items-center justify-center gap-2"
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[#1A2E1A] dark:text-[#FDF8F0] mb-1">
+                    Subject
+                  </label>
+                  <select
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl border border-[rgba(200,132,26,0.3)] focus:border-[#C8841A] focus:outline-none dark:bg-[#2C1810] dark:text-[#FDF8F0]"
                   >
-                    <Send className="w-5 h-5" />
-                    Send Message
-                  </button>
-                </form>
-              )}
+                    {subjects.map((subj) => (
+                      <option key={subj} value={subj}>{subj}</option>
+                    ))}
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-[#1A2E1A] dark:text-[#FDF8F0] mb-1">
+                    Message
+                  </label>
+                  <textarea
+                    name="message"
+                    required
+                    rows={5}
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 rounded-xl border border-[rgba(200,132,26,0.3)] focus:border-[#C8841A] focus:outline-none dark:bg-[#2C1810] dark:text-[#FDF8F0] resize-none"
+                    placeholder="How can we help you?"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="flex items-center justify-center gap-2 w-full bg-[#C8841A] text-[#1A2E1A] py-4 rounded-xl font-bold text-lg hover:brightness-110 transition-all"
+                >
+                  <Send size={20} />
+                  Send via WhatsApp
+                </button>
+              </form>
             </motion.div>
 
-            {/* Contact Info */}
+            {/* Quick Contact */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="space-y-8"
             >
-              {/* Thamel Location */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 bg-golden-amber rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-7 h-7 text-white" />
+              <h2 className="font-playfair text-3xl text-[#1A2E1A] dark:text-[#FDF8F0] mb-6">
+                Quick Contact
+              </h2>
+              <div className="space-y-4">
+                <a
+                  href="tel:+9779887165566"
+                  className="flex items-center gap-4 p-4 bg-white dark:bg-[#2C1810] rounded-xl shadow-md hover:shadow-lg transition-shadow"
+                >
+                  <div className="w-12 h-12 bg-[#C8841A]/10 rounded-full flex items-center justify-center">
+                    <Phone size={24} className="text-[#C8841A]" />
                   </div>
                   <div>
-                    <h3 className="font-playfair text-xl font-bold text-deep-forest mb-2">Thamel Store</h3>
-                    <p className="text-warm-brown text-sm mb-3">Main Branch</p>
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <MapPin className="w-5 h-5 text-golden-amber flex-shrink-0 mt-0.5" />
-                        <p className="text-warm-espresso text-sm">
-                          Thamel Marg, 100m from Tridevi Sadak T-junction, Ward 26, Kathmandu 44600
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Phone className="w-5 h-5 text-golden-amber" />
-                        <a href="tel:+9779887165566" className="text-warm-espresso hover:text-golden-amber transition-colors">
-                          +977 988-716-5566
-                        </a>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Clock className="w-5 h-5 text-golden-amber" />
-                        <span className="text-warm-espresso">7:00 AM - 8:00 PM Daily</span>
-                      </div>
-                    </div>
+                    <p className="text-sm text-[#5C3317] dark:text-[#FDF8F0]/70">Call Us</p>
+                    <p className="font-semibold text-[#1A2E1A] dark:text-[#FDF8F0]">+977 988-716-5566</p>
                   </div>
-                </div>
-              </div>
+                </a>
 
-              {/* Nayabazar Location */}
-              <div className="bg-white rounded-2xl p-6 shadow-lg">
-                <div className="flex items-start gap-4">
-                  <div className="w-14 h-14 bg-warm-brown rounded-full flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-7 h-7 text-white" />
+                <a
+                  href="https://wa.me/9779887165566"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 bg-white dark:bg-[#2C1810] rounded-xl shadow-md hover:shadow-lg transition-shadow"
+                >
+                  <div className="w-12 h-12 bg-[#25D366]/10 rounded-full flex items-center justify-center">
+                    <MessageCircle size={24} className="text-[#25D366]" />
                   </div>
                   <div>
-                    <h3 className="font-playfair text-xl font-bold text-deep-forest mb-2">Nayabazar Factory</h3>
-                    <p className="text-warm-brown text-sm mb-3">Production Outlet</p>
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3">
-                        <MapPin className="w-5 h-5 text-warm-brown flex-shrink-0 mt-0.5" />
-                        <p className="text-warm-espresso text-sm">Nayabazar, Kathmandu</p>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Phone className="w-5 h-5 text-warm-brown" />
-                        <a href="tel:+9779887165566" className="text-warm-espresso hover:text-warm-brown transition-colors">
-                          +977 988-716-5566
-                        </a>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <Clock className="w-5 h-5 text-warm-brown" />
-                        <span className="text-warm-espresso">7:00 AM - 8:00 PM Daily</span>
-                      </div>
-                    </div>
+                    <p className="text-sm text-[#5C3317] dark:text-[#FDF8F0]/70">WhatsApp</p>
+                    <p className="font-semibold text-[#1A2E1A] dark:text-[#FDF8F0]">Message Us</p>
                   </div>
-                </div>
+                </a>
+
+                <a
+                  href="https://www.facebook.com/freshbake.np"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 bg-white dark:bg-[#2C1810] rounded-xl shadow-md hover:shadow-lg transition-shadow"
+                >
+                  <div className="w-12 h-12 bg-[#1877F2]/10 rounded-full flex items-center justify-center">
+                    <Facebook size={24} className="text-[#1877F2]" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-[#5C3317] dark:text-[#FDF8F0]/70">Facebook</p>
+                    <p className="font-semibold text-[#1A2E1A] dark:text-[#FDF8F0]">facebook.com/freshbake.np</p>
+                  </div>
+                </a>
+
+                <a
+                  href="https://www.instagram.com/fresh_bake.np"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-4 p-4 bg-white dark:bg-[#2C1810] rounded-xl shadow-md hover:shadow-lg transition-shadow"
+                >
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 rounded-full flex items-center justify-center">
+                    <Instagram size={24} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-[#5C3317] dark:text-[#FDF8F0]/70">Instagram</p>
+                    <p className="font-semibold text-[#1A2E1A] dark:text-[#FDF8F0]">@fresh_bake.np</p>
+                  </div>
+                </a>
               </div>
 
-              {/* Quick Actions */}
-              <div className="bg-deep-forest rounded-2xl p-6 text-cream-white">
-                <h3 className="font-playfair text-lg font-bold mb-4">Quick Connect</h3>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <a
-                    href="tel:+9779887165566"
-                    className="flex items-center gap-3 bg-white/10 rounded-xl p-4 hover:bg-white/20 transition-colors"
-                  >
-                    <div className="w-10 h-10 bg-golden-amber rounded-full flex items-center justify-center">
-                      <Phone className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-cream-white/70">Call Us</p>
-                      <p className="font-medium">+977 988-716-5566</p>
-                    </div>
-                  </a>
-                  <a
-                    href="https://wa.me/9779887165566"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-white/10 rounded-xl p-4 hover:bg-white/20 transition-colors"
-                  >
-                    <div className="w-10 h-10 bg-halal-green rounded-full flex items-center justify-center">
-                      <MessageCircle className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-cream-white/70">WhatsApp</p>
-                      <p className="font-medium">Chat with us</p>
-                    </div>
-                  </a>
-                  <a
-                    href="https://www.instagram.com/fresh_bake.np"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-white/10 rounded-xl p-4 hover:bg-white/20 transition-colors"
-                  >
-                    <div className="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center">
-                      <Instagram className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-cream-white/70">Instagram</p>
-                      <p className="font-medium">@fresh_bake.np</p>
-                    </div>
-                  </a>
-                  <a
-                    href="https://www.facebook.com/freshbake.np"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 bg-white/10 rounded-xl p-4 hover:bg-white/20 transition-colors"
-                  >
-                    <div className="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center">
-                      <Facebook className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm text-cream-white/70">Facebook</p>
-                      <p className="font-medium">@freshbake.np</p>
-                    </div>
-                  </a>
+              {/* Hours */}
+              <div className="mt-8 p-6 bg-[#1A2E1A] rounded-xl">
+                <h3 className="font-playfair text-xl text-[#FDF8F0] mb-4 flex items-center gap-2">
+                  <Clock size={20} className="text-[#C8841A]" />
+                  Opening Hours
+                </h3>
+                <div className="space-y-2 text-[#FDF8F0]/80">
+                  <div className="flex justify-between">
+                    <span>Monday - Sunday</span>
+                    <span className="font-semibold text-[#C8841A]">7:00 AM - 8:00 PM</span>
+                  </div>
                 </div>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
-
-      {/* Map Placeholder */}
-      <section className="py-16 bg-soft-ivory">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-playfair text-3xl font-bold text-deep-forest mb-4"
-            >
-              Find Us on the Map
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-warm-brown"
-            >
-              Visit us in the heart of Thamel, Kathmandu
-            </motion.p>
-          </div>
-          
-          {/* Map Placeholder */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="bg-gradient-to-br from-deep-forest/20 to-halal-green/20 rounded-3xl p-16 flex items-center justify-center"
-          >
-            <div className="text-center">
-              <MapPin className="w-16 h-16 text-golden-amber mx-auto mb-4" />
-              <h3 className="font-playfair text-2xl font-bold text-deep-forest mb-2">Thamel, Kathmandu</h3>
-              <p className="text-warm-brown">On Thamel Marg, 100m from Tridevi Sadak T-junction</p>
-              <a
-                href="https://maps.google.com/?q=Thamel+Marg+Kathmandu"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block mt-6 bg-golden-amber text-white px-6 py-3 rounded-full font-semibold hover:bg-opacity-90 transition-all"
-              >
-                Open in Google Maps
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-    </>
+    </div>
   )
 }

@@ -1,250 +1,259 @@
 import { motion } from 'framer-motion'
-import { Heart, ShieldCheck, Users, Award, Clock, MapPin, Phone, ChefHat, UserCheck, BadgeCheck, Factory } from 'lucide-react'
+import {
+  ShieldCheck,
+  Factory,
+  Heart,
+  Users,
+  Clock,
+  MapPin
+} from 'lucide-react'
+
+const stats = [
+  { icon: MapPin, label: 'Locations in Kathmandu', value: '2' },
+  { icon: ShieldCheck, label: 'Halal Every Day', value: '100%' },
+  { icon: Factory, label: 'In-House Production', value: 'All' },
+  { icon: Clock, label: 'Opens Daily', value: '7AM' }
+]
+
+function StatCard({ stat, index }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ delay: index * 0.1 }}
+      className="text-center"
+    >
+      <stat.icon size={32} className="text-[#C8841A] mx-auto mb-2" />
+      <p className="font-playfair text-5xl text-[#C8841A] font-bold">{stat.value}</p>
+      <p className="text-[#FDF8F0]/80 text-sm mt-1">{stat.label}</p>
+    </motion.div>
+  )
+}
 
 export default function About() {
   return (
-    <>
+    <div className="min-h-screen bg-[#FDF8F0] dark:bg-[#1A1008] transition-colors duration-300">
       {/* Hero Section */}
-      <section className="pt-32 pb-16 bg-gradient-to-b from-soft-ivory to-cream-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
+      <section className="bg-[#1A2E1A] py-16 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-center max-w-3xl mx-auto"
+            className="font-playfair text-5xl text-[#FDF8F0] mb-2"
           >
-            <div className="w-20 h-20 bg-golden-amber/20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Heart className="w-10 h-10 text-golden-amber" />
-            </div>
-            <h1 className="font-playfair text-4xl md:text-5xl lg:text-6xl font-bold text-deep-forest mb-4">
-              Our Story
-            </h1>
-            <p className="font-dancing text-2xl text-golden-amber mb-4">
-              Fresh Baked. Pure Halal. Pure Love.
-            </p>
-            <p className="text-warm-brown text-lg">
-              From our hearts to your table, we bring you the finest European-style bakery experience in Kathmandu.
-            </p>
-          </motion.div>
+            Our Story
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="font-dancing text-2xl text-[#C8841A]"
+          >
+            Baked with heart, served with love
+          </motion.p>
         </div>
       </section>
 
-      {/* Story Section */}
-      <section className="py-20 bg-cream-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Our Story Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Story Image */}
+            {/* Left - Image */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
+              className="rounded-2xl overflow-hidden shadow-2xl"
             >
-              <div className="bg-gradient-to-br from-golden-amber/20 to-warm-brown/20 rounded-3xl p-12 flex items-center justify-center aspect-square max-w-md mx-auto">
-                <div className="w-48 h-48 bg-golden-amber/30 rounded-full flex items-center justify-center">
-                  <Factory className="w-24 h-24 text-golden-amber/60" />
-                </div>
-              </div>
+              <img
+                src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f"
+                alt="Fresh Bake Factory"
+                className="w-full h-96 object-cover"
+              />
             </motion.div>
+
+            {/* Right - Text */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <span className="inline-block text-golden-amber font-medium tracking-wider uppercase text-sm mb-4">
-                Who We Are
-              </span>
-              <h2 className="font-playfair text-3xl md:text-4xl font-bold text-deep-forest mb-6">
-                A Passion for Perfect Baking
+              <h2 className="font-playfair text-3xl text-[#1A2E1A] dark:text-[#FDF8F0] mb-6">
+                Why We Bake
               </h2>
-              <p className="text-warm-espresso/80 mb-4 leading-relaxed">
-                Fresh Bake Factory Outlet was born from a simple dream: to bring authentic European-style bakery delights to the heart of Nepal, all while maintaining the highest standards of halal certification.
-              </p>
-              <p className="text-warm-espresso/80 mb-6 leading-relaxed">
-                Located in the vibrant streets of Thamel, our bakery has become a beloved destination for travelers from around the world and locals alike. Every morning, our skilled bakers wake before dawn to prepare fresh bread, pastries, and our signature dishes that keep our customers coming back.
-              </p>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-golden-amber/20 rounded-full flex items-center justify-center">
-                  <ShieldCheck className="w-6 h-6 text-golden-amber" />
-                </div>
-                <div>
-                  <p className="font-semibold text-deep-forest">100% Halal Certified</p>
-                  <p className="text-sm text-warm-brown">Quality you can trust</p>
-                </div>
+              <div className="space-y-4 text-[#5C3317] dark:text-[#FDF8F0]/80">
+                <p>
+                  At Fresh Bake Factory Outlet, we believe everyone deserves fresh, high quality halal baked goods at affordable prices. Starting from our Nayabazar factory, we produce everything in-house daily — from our legendary chicken pizza to our flaky chocolate danish — and bring it fresh to Thamel every morning.
+                </p>
+                <p>
+                  No preservatives. No shortcuts. Just love.
+                </p>
+                <p>
+                  We put our heart and soul into every bake, with a meticulous eye for detail, flavor, and quality. Halal certified, tourist-loved, locally rooted.
+                </p>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="py-20 bg-soft-ivory">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-block text-golden-amber font-medium tracking-wider uppercase text-sm mb-4"
-            >
-              What We Believe
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-playfair text-3xl md:text-4xl font-bold text-deep-forest mb-4"
-            >
-              Our Core Values
-            </motion.h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              { icon: Heart, title: 'Made with Love', desc: 'Every item is crafted with passion and care' },
-              { icon: ShieldCheck, title: 'Pure & Halal', desc: '100% halal certified ingredients' },
-              { icon: Clock, title: 'Always Fresh', desc: 'Baked fresh daily, every single day' },
-              { icon: Award, title: 'Premium Quality', desc: 'European bakery standards' }
-            ].map((value, index) => (
-              <motion.div
-                key={value.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center bg-white rounded-2xl p-8 shadow-lg"
-              >
-                <div className="w-16 h-16 bg-golden-amber/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <value.icon className="w-8 h-8 text-golden-amber" />
-                </div>
-                <h3 className="font-playfair text-xl font-bold text-deep-forest mb-3">{value.title}</h3>
-                <p className="text-warm-brown text-sm">{value.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team Section */}
-      <section className="py-20 bg-cream-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.span
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-block text-golden-amber font-medium tracking-wider uppercase text-sm mb-4"
-            >
-              The People Behind
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="font-playfair text-3xl md:text-4xl font-bold text-deep-forest mb-4"
-            >
-              Our Team
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="text-warm-brown text-lg max-w-2xl mx-auto"
-            >
-              A passionate team of bakers and hospitality professionals dedicated to serving you.
-            </motion.p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {[
-              { name: 'Master Bakers', role: 'Expert bakers with years of experience', icon: ChefHat },
-              { name: 'Front of House', role: 'Friendly staff to serve you with a smile', icon: UserCheck },
-              { name: 'Quality Team', role: 'Ensuring every item meets our standards', icon: BadgeCheck }
-            ].map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-8 text-center shadow-lg"
-              >
-                <div className="w-24 h-24 bg-golden-amber/20 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <member.icon className="w-12 h-12 text-golden-amber" />
-                </div>
-                <h3 className="font-playfair text-xl font-bold text-deep-forest mb-2">{member.name}</h3>
-                <p className="text-warm-brown text-sm">{member.role}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Visit Us CTA */}
-      <section className="py-20 bg-deep-forest">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      {/* Mission Cards */}
+      <section className="py-16 bg-[#FAF4E8] dark:bg-[#1A1008] px-4">
+        <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-playfair text-3xl md:text-4xl font-bold text-cream-white mb-4"
+            className="font-playfair text-3xl text-[#1A2E1A] dark:text-[#FDF8F0] text-center mb-12"
           >
-            Come Visit Us
+            What We Stand For
           </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-white dark:bg-[#2C1810] rounded-2xl p-8 shadow-lg text-center"
+            >
+              <div className="w-16 h-16 bg-[#2D6A2D]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <ShieldCheck size={32} className="text-[#2D6A2D]" />
+              </div>
+              <h3 className="font-playfair text-xl text-[#1A2E1A] dark:text-[#FDF8F0] mb-3">
+                100% Halal
+              </h3>
+              <p className="text-[#5C3317] dark:text-[#FDF8F0]/70 text-sm">
+                Every single ingredient and process is halal certified. Always. No exceptions.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="bg-white dark:bg-[#2C1810] rounded-2xl p-8 shadow-lg text-center"
+            >
+              <div className="w-16 h-16 bg-[#C8841A]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Factory size={32} className="text-[#C8841A]" />
+              </div>
+              <h3 className="font-playfair text-xl text-[#1A2E1A] dark:text-[#FDF8F0] mb-3">
+                Factory Fresh
+              </h3>
+              <p className="text-[#5C3317] dark:text-[#FDF8F0]/70 text-sm">
+                We produce everything in our Nayabazar factory and bring it fresh to Thamel daily. No middlemen.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="bg-white dark:bg-[#2C1810] rounded-2xl p-8 shadow-lg text-center"
+            >
+              <div className="w-16 h-16 bg-[#C8841A]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Heart size={32} className="text-[#C8841A]" />
+              </div>
+              <h3 className="font-playfair text-xl text-[#1A2E1A] dark:text-[#FDF8F0] mb-3">
+                Affordable Quality
+              </h3>
+              <p className="text-[#5C3317] dark:text-[#FDF8F0]/70 text-sm">
+                Best pastries and coffee in Thamel — at prices that respect your budget. Always.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Halal Certificate Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-cream-white/80 text-lg mb-8"
+            className="bg-[#1A2E1A] rounded-2xl p-10 text-center"
           >
-            Experience the warmth of our bakery and taste the difference fresh baking makes.
-          </motion.p>
+            <ShieldCheck size={64} className="text-[#2D6A2D] mx-auto mb-4" />
+            <h3 className="font-playfair text-3xl text-[#FDF8F0] mb-4">
+              Halal Certified
+            </h3>
+            <p className="text-[#FDF8F0]/90 text-lg max-w-2xl mx-auto">
+              All products, ingredients and processes at Fresh Bake Factory Outlet are 100% Halal certified. Safe and trusted for our Muslim customers and all guests.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="py-16 bg-[#FAF4E8] dark:bg-[#1A1008] px-4">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left max-w-2xl mx-auto"
+            className="text-center mb-12"
           >
-            <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-golden-amber rounded-full flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="font-playfair text-lg font-bold text-cream-white">Thamel Store</h3>
-              </div>
-              <p className="text-cream-white/80 text-sm mb-3">
-                Thamel Marg, 100m from Tridevi Sadak T-junction, Ward 26, Kathmandu 44600
-              </p>
-              <div className="flex items-center gap-2 text-golden-amber text-sm">
-                <Phone className="w-4 h-4" />
-                <span>+977 988-716-5566</span>
-              </div>
-            </div>
-            <div className="bg-white/10 rounded-2xl p-6 backdrop-blur-sm">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 bg-warm-brown rounded-full flex items-center justify-center">
-                  <MapPin className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="font-playfair text-lg font-bold text-cream-white">Nayabazar Factory</h3>
-              </div>
-              <p className="text-cream-white/80 text-sm mb-3">
-                Nayabazar, Kathmandu
-              </p>
-              <div className="flex items-center gap-2 text-golden-amber text-sm">
-                <Phone className="w-4 h-4" />
-                <span>+977 988-716-5566</span>
-              </div>
-            </div>
+            <h2 className="font-playfair text-3xl text-[#1A2E1A] dark:text-[#FDF8F0] mb-2">
+              Meet Our Team
+            </h2>
+            <p className="font-dancing text-xl text-[#C8841A]">
+              The faces behind your favourite bakes
+            </p>
           </motion.div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-8 text-cream-white/60 flex items-center justify-center gap-2"
-          >
-            <Clock className="w-5 h-5 text-golden-amber" />
-            Open daily from 7:00 AM to 8:00 PM
-          </motion.p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white dark:bg-[#2C1810] rounded-2xl p-8 text-center shadow-lg"
+            >
+              <div className="w-24 h-24 bg-[#C8841A]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users size={48} className="text-[#C8841A]" />
+              </div>
+              <h3 className="font-playfair text-xl text-[#1A2E1A] dark:text-[#FDF8F0] mb-1">
+                Aashim
+              </h3>
+              <p className="text-[#5C3317] dark:text-[#FDF8F0]/70 text-sm italic">
+                "Hardworking and dedicated"
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="bg-white dark:bg-[#2C1810] rounded-2xl p-8 text-center shadow-lg"
+            >
+              <div className="w-24 h-24 bg-[#C8841A]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users size={48} className="text-[#C8841A]" />
+              </div>
+              <h3 className="font-playfair text-xl text-[#1A2E1A] dark:text-[#FDF8F0] mb-1">
+                Babeen
+              </h3>
+              <p className="text-[#5C3317] dark:text-[#FDF8F0]/70 text-sm italic">
+                "Incredibly friendly and welcoming"
+              </p>
+            </motion.div>
+          </div>
         </div>
       </section>
-    </>
+
+      {/* Stats Section */}
+      <section className="bg-[#2C1810] py-20 px-4">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <StatCard key={stat.label} stat={stat} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+    </div>
   )
 }
