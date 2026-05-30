@@ -18,6 +18,9 @@ export default {
         'dm-sans': ['"DM Sans"', 'sans-serif'],
         'dancing': ['"Dancing Script"', 'cursive'],
       },
+      transitionDuration: {
+        '350': '350ms',
+      },
     },
   },
   plugins: [],

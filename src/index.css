@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,7 +10,9 @@
   }
   
   body {
-    @apply bg-cream-white text-warm-espresso font-dm-sans;
+    @apply bg-[#FDF8F0] text-[#1A0800] font-dm-sans;
+    @apply dark:bg-[#1A1008] dark:text-[#FDF8F0];
+    @apply transition-colors duration-300;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -31,9 +35,17 @@
   
   .section-title {
     @apply font-playfair text-3xl md:text-4xl font-bold text-deep-forest mb-4;
+    @apply dark:text-[#FDF8F0];
   }
   
   .section-subtitle {
     @apply text-warm-brown text-lg mb-8;
+    @apply dark:text-[#FDF8F0]/70;
   }
+}
+
+/* Custom animations */
+@keyframes fadeInOut {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
