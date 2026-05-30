@@ -128,7 +128,11 @@ function OrderSummary({ orderItems, orderType, selectedBranch, deliveryAddress, 
   const subtotal = orderItems.reduce((sum, item) => sum + (item.price * item.quantity), 0)
 
   const handlePlaceOrder = () => {
-    let message = `Hello Fresh Bake! I would like to order:\n`
+    let message = `Hello Fresh Bake!
+
+I'd like to order:
+━━━━━━━━━━━━
+`
 
     orderItems.forEach(item => {
       const itemPrice = item.maxPrice > item.price 
@@ -137,13 +141,13 @@ function OrderSummary({ orderItems, orderType, selectedBranch, deliveryAddress, 
       message += `${item.name} x${item.quantity} — NPR ${itemPrice}\n`
     })
 
-    message += `\nTotal: NPR ${subtotal}\n`
-    message += `Order Type: ${orderType === 'pickup' ? 'Pickup' : 'Delivery'}\n`
+    message += `━━━━━━━━━━━━
+Total: NPR ${subtotal}\n`
 
     if (orderType === 'pickup') {
-      message += `Pickup from: ${selectedBranch === 'thamel' ? 'Thamel Marg' : 'Nayabazar Factory Outlet'}\n`
+      message += `\nPickup from: ${selectedBranch === 'thamel' ? 'Thamel Marg' : 'Nayabazar Factory Outlet'}\n`
     } else {
-      message += `Delivery to: ${deliveryAddress.fullName}, ${deliveryAddress.whatsapp}, ${deliveryAddress.address}\n`
+      message += `\nDelivery to:\n${deliveryAddress.fullName}\n${deliveryAddress.whatsapp}\n${deliveryAddress.address}\n`
     }
 
     const whatsappUrl = `https://wa.me/9779887165566?text=${encodeURIComponent(message)}`
@@ -189,10 +193,13 @@ function OrderSummary({ orderItems, orderType, selectedBranch, deliveryAddress, 
           </div>
 
           <div className="border-t border-[rgba(200,132,26,0.3)] pt-4">
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-2">
               <span className="font-bold text-[#C8841A] text-xl">Subtotal</span>
               <span className="font-bold text-[#C8841A] text-xl">NPR {subtotal}</span>
             </div>
+            <p className="text-sm text-[#2D6A2D] text-center mb-4">
+              Free pickup at both locations
+            </p>
 
             <button
               onClick={handlePlaceOrder}
@@ -341,7 +348,7 @@ export default function OrderOnline() {
             transition={{ delay: 0.1 }}
             className="font-dancing text-2xl text-[#C8841A] mb-4"
           >
-            Fresh. Halal. Ready for You.
+            Fresh. Halal. Delivered.
           </motion.p>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -349,7 +356,7 @@ export default function OrderOnline() {
             transition={{ delay: 0.2 }}
             className="text-[#FDF8F0]/80"
           >
-            Order via WhatsApp for pickup from Thamel or Nayabazar.
+            Order via WhatsApp for pickup or delivery from Thamel or Nayabazar.
           </motion.p>
         </div>
       </section>
