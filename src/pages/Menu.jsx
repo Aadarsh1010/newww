@@ -357,6 +357,7 @@ function CustomCakeBanner() {
 
 export default function Menu() {
   const [activeCategory, setActiveCategory] = useState('All')
+  const [showHalalOnly, setShowHalalOnly] = useState(false)
 
   const getDisplayItems = () => {
     if (activeCategory === 'All') {
@@ -408,21 +409,36 @@ export default function Menu() {
       {/* Filter System */}
       <section className="sticky top-[76px] z-40 bg-[#FDF8F0] dark:bg-[#1A1008] py-4 px-4 border-b border-[rgba(200,132,26,0.2)]">
         <div className="max-w-7xl mx-auto">
-          {/* Category Tabs */}
-          <div className="flex flex-wrap justify-center gap-3 mb-4">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
-                  activeCategory === category
-                    ? 'bg-[#C8841A] text-[#1A2E1A]'
-                    : 'border border-[#C8841A] text-[#C8841A] hover:bg-[#C8841A]/10'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            {/* Category Tabs */}
+            <div className="flex flex-wrap justify-center gap-2">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                    activeCategory === category
+                      ? 'bg-[#C8841A] text-[#1A2E1A]'
+                      : 'border border-[#C8841A] text-[#C8841A] hover:bg-[#C8841A]/10'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+            
+            {/* Dietary Toggle */}
+            <button
+              onClick={() => setShowHalalOnly(!showHalalOnly)}
+              className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                showHalalOnly
+                  ? 'bg-[#2D6A2D] text-white'
+                  : 'border border-[#2D6A2D] text-[#2D6A2D] hover:bg-[#2D6A2D]/10'
+              }`}
+            >
+              <ShieldCheck size={16} />
+              Show Halal Only
+            </button>
           </div>
         </div>
       </section>
